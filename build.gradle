@@ -1,0 +1,36 @@
+import com.vanniktech.maven.publish.SonatypeHost
+
+plugins {
+    id 'java-library'
+    id 'com.vanniktech.maven.publish' version "$mavenPublishPlugin"
+}
+
+group 'io.github.palexdev'
+version "$zip4j"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junit"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junit"
+
+    testImplementation "org.assertj:assertj-core:$assertj"
+    testImplementation "org.mockito:mockito-inline:$mockito"
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+    tasks.withType(Jar).each { it.archiveBaseName.set("zip4j") }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+mavenPublishing {
+    publishToMavenCentral(SonatypeHost.S01)
+    signAllPublications()
+}
