@@ -24,6 +24,16 @@ java {
     tasks.withType(Jar).each { it.archiveBaseName.set("zip4j") }
 }
 
+compileJava {
+    sourceCompatibility = "$jdk"
+    targetCompatibility = "$jdk"
+}
+
+compileTestJava {
+    sourceCompatibility = "$jdk"
+    targetCompatibility = "$jdk"
+}
+
 test {
     useJUnitPlatform()
 }
